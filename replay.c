@@ -6,7 +6,7 @@
 #include <signal.h>
 #include <time.h>
 
-const int record_duration = 5;
+int record_duration = 30;
 int sample_rate = 0;
 int channel_count = 0;
 enum SoundIoFormat fmt = SoundIoFormatInvalid;
@@ -52,7 +52,9 @@ struct Buffer {
 int usage(char *exe) {
     fprintf(stderr, "Usage: %s [options]\n"
             "Options:\n"
+            "  [--list-devices]\n"
             "  [--device id]\n"
+            "  [--duration seconds]\n"
             , exe);
     return 1;
 }
@@ -255,13 +257,22 @@ void save_recording(int signo) {
 int main (int argc, char *argv[]) {
 	char *exe = argv[0];
 	char *device_id = NULL;
+	bool do_list_devices = false;
+
 	for (int i = 1; i < argc; i += 1) {
 		char *arg = argv[i];
 		if (arg[0] == '-' && arg[1] == '-') {
-			if (++i >= argc)
+			if (strcmp(arg, "--list-devices") == 0) {
+				do_list_devices = true;
+			} else if (++i >= argc) {
 				return usage(exe);
-			else if (strcmp(arg, "--device") == 0) {
+			} else if (strcmp(arg, "--device") == 0) {
 				device_id = argv[i];
+			} else if (strcmp(arg, "--duration") == 0) {
+				char *endptr = NULL;
+				record_duration = strtol(argv[i], &endptr, 10);
+				if (*endptr != 0)
+					return usage(exe);
 			} else {
 				return usage(exe);
 			}
@@ -279,7 +290,8 @@ int main (int argc, char *argv[]) {
 
 	soundio_flush_events(soundio);
 
-	list_devices(soundio);
+	if (do_list_devices)
+		list_devices(soundio);
 
 	struct SoundIoDevice *selected_device = NULL;
 
