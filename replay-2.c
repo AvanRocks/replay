@@ -175,7 +175,6 @@ void save_recording(int signo) {
 	sf_info.channels		= channel_count;
 	sf_info.format			= (SF_FORMAT_WAV | SF_FORMAT_PCM_24) ;
 
-	//fprintf(stderr, "sample rate: %d\nframes: %d\nchannels: %d\n", sf_info.samplerate, sf_info.frames, sf_info.channels);
 	
 	time_t raw_time = time(NULL);
 	struct tm *time_info = localtime(&raw_time);
@@ -188,13 +187,7 @@ void save_recording(int signo) {
 	strcpy(out_file_name, "replay-");
 	strcat(out_file_name, tmp);
 
-	/*
-	for (size_t i = 0; i < strlen(out_file_name); i += 1) {
-		if (out_file_name[i] == ' ')
-			out_file_name[i] = '_';
-	}
-	*/
-	fprintf(stderr, out_file_name);
+	fprintf(stderr, "%s\n", out_file_name);
 
 	if ( (out_file = sf_open(out_file_name, SFM_WRITE, &sf_info)) == NULL )
 		error_msg_sf("Error opening output file: ", NULL);
