@@ -54,7 +54,7 @@ int usage(char *exe) {
             "Options:\n"
             "  [--list-devices]\n"
             "  [--device id]\n"
-            "  [--duration seconds]\n"
+            "  [--duration seconds] (Default 30)\n"
             , exe);
     return 1;
 }
