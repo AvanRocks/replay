@@ -49,6 +49,17 @@ struct Buffer {
 	int size;
 }buf;
 
+int help(char *exe) {
+	fprintf(stderr,
+			"Options:\n"
+			"  [--list-devices]       lists the audio input and output devices found\n"
+			"  [--device id]          select the device replay uses (use --list-devicse to find the id)\n"
+			"  [--duration seconds]   set the duration of audio to save when requested (Default 30)\n"
+			"  [--help]               see this help message\n"
+			, exe);
+	return 0;
+}
+
 int usage(char *exe) {
     fprintf(stderr, "Usage: %s [options]\n"
             "Options:\n"
@@ -265,9 +276,8 @@ int main (int argc, char *argv[]) {
 		if (arg[0] == '-' && arg[1] == '-') {
 			if (strcmp(arg, "--list-devices") == 0) {
 				do_list_devices = true;
-			} else if (strcmp(arg, "--list-devices") == 0) {
-				usage(exe);
-				return 0;
+			} else if (strcmp(arg, "--help") == 0) {
+				return help(exe);
 			} else if (++i >= argc) {
 				return usage(exe);
 			} else if (strcmp(arg, "--device") == 0) {
