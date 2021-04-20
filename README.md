@@ -23,10 +23,10 @@ You will need to compile Replay manually, but it is very straightforward. See th
 
 ## Options
 ```
-[--list-devices]			lists the audio input and output devices found 
-[--device id]					select the device replay uses (use --list-devicse to find the id)
-[--duration seconds]	set the duration of audio to save when requested (Default 30)
-[--help]							see this help message
+[--list-devices]      lists the audio input and output devices found 
+[--device id]         select the device replay uses (use --list-devicse to find the id)
+[--duration seconds]  set the duration of audio to save when requested (Default 30)
+[--help]              see this help message
 ```
 ## Build
 
