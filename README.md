@@ -3,9 +3,9 @@ Save the last few seconds of your computer's audio, like an audio version of an 
 
 Replay lets you record the last 30 seconds (duration is adjustable) of system audio whenever needed. You can run Replay in the background during virtual school lessons and if you miss a key sentence in the lesson you can hit save. This negates the need to record entire lessons in case you want to revisit them.
 
-Replay was created as a lightweight alternative to recording virtual school lessons. My laptop couldn't handle recording video while attending a lesson, and I also didn't want to waste disk space with large recordings.
-
 Replay is written entirely in C and uses relatively little cpu, which makes it suitable to run in background at all times. Memory usage depends on the duration of audio you set it to record.
+
+Replay was created as a lightweight alternative to recording virtual school lessons. My laptop couldn't handle recording video while attending a lesson, and I also didn't want to waste disk space with large recordings.
 
 ## Usage
 
