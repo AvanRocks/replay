@@ -55,6 +55,7 @@ int usage(char *exe) {
             "  [--list-devices]\n"
             "  [--device id]\n"
             "  [--duration seconds] (Default 30)\n"
+            "  [--help]\n"
             , exe);
     return 1;
 }
@@ -74,20 +75,20 @@ void list_devices(struct SoundIo *soundio) {
     int default_output = soundio_default_output_device_index(soundio);
     int default_input = soundio_default_input_device_index(soundio);
 
+    fprintf(stderr, "%d devices found\n\n", input_count + output_count);
     fprintf(stderr, "--------Input Devices--------\n\n");
     for (int i = 0; i < input_count; i += 1) {
         struct SoundIoDevice *device = soundio_get_input_device(soundio, i);
         print_device(device, default_input == i);
         soundio_device_unref(device);
     }
-    fprintf(stderr, "--------Output Devices--------\n\n");
+    fprintf(stderr, "--------Output Devices--------\n");
     for (int i = 0; i < output_count; i += 1) {
         struct SoundIoDevice *device = soundio_get_output_device(soundio, i);
         print_device(device, default_output == i);
         soundio_device_unref(device);
     }
 
-    fprintf(stderr, "%d devices found\n\n", input_count + output_count);
 }
 
 void error(char *error_message) {
@@ -264,6 +265,9 @@ int main (int argc, char *argv[]) {
 		if (arg[0] == '-' && arg[1] == '-') {
 			if (strcmp(arg, "--list-devices") == 0) {
 				do_list_devices = true;
+			} else if (strcmp(arg, "--list-devices") == 0) {
+				usage(exe);
+				return 0;
 			} else if (++i >= argc) {
 				return usage(exe);
 			} else if (strcmp(arg, "--device") == 0) {
@@ -290,8 +294,10 @@ int main (int argc, char *argv[]) {
 
 	soundio_flush_events(soundio);
 
-	if (do_list_devices)
+	if (do_list_devices) {
 		list_devices(soundio);
+		return 0;
+	}
 
 	struct SoundIoDevice *selected_device = NULL;
 
