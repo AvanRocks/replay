@@ -52,6 +52,8 @@ To uninstall, simply run the following command from that same build directory us
 sudo make uninstall
 ```
 
+## Possible Errors
+
 If you encounter an error such as
 ```
 replay: error while loading shared libraries: libsoundio.so.2: cannot open shared object file: No such file or directory
