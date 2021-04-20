@@ -51,3 +51,15 @@ To uninstall, simply run the following command from that same build directory us
 ```
 sudo make uninstall
 ```
+
+If you encounter an error such as
+```
+replay: error while loading shared libraries: libsoundio.so.2: cannot open shared object file: No such file or directory
+```
+it is because libsoundio installs its shared library into `/usr/local/lib/`, which is by default not a directory which the linker searches.
+
+To fix this error, we need to tell the linker (which is `ld`) to look in `/usr/local/lib/` when searching for libraries. Simply add a new line containing `/usr/local/lib/` to the file `/etc/ld.so.conf` with your favorite text editor. Or use this command:
+```
+echo /usr/local/lib/ | sudo tee --append /etc/ld.so.conf
+```
+and then run `sudo ldconfig` to update the cache.
