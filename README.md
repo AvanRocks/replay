@@ -47,4 +47,7 @@ make
 sudo make install
 ```
 
-
+To uninstall, simply run the following command from that same build directory used above:
+```
+sudo make uninstall
+```
