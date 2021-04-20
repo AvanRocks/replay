@@ -32,7 +32,7 @@ You will need to compile Replay manually, but it is very straightforward. See th
 
 First install the dependancies:
 - cmake
-- [libsoundio](https://github.com/andrewrk/libsoundio)
+- [libsoundio](https://github.com/andrewrk/libsoundio) (grab the latest release [here](https://github.com/andrewrk/libsoundio/releases))
 - libsndfile
 
 cmake and libsndfile are likely available in distribution repositories, but you will need to build libsoundio from source.
